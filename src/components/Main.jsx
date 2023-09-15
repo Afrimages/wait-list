@@ -1,7 +1,27 @@
-import React from 'react'
+'use client';
+
+import React, { useState } from 'react'
 import { FaArrowRight } from "react-icons/fa"
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const Main = () => {
+
+    const [email, setEmail] = useState("")
+
+    const handleMail = (e)=>{
+        setEmail(e.target.value)
+    }
+
+    const notify = (e) => {
+        e.preventDefault()
+        setEmail("")
+        toast.success('Thanks for Joining.', {
+            icon: '👏',
+        })
+    };
+
+    
   return (
     <div>
         <div className="fixed top-0 left-0 w-full h-100vh">
@@ -24,13 +44,13 @@ const Main = () => {
             </form> */}
 
             <form action="" className='flex items-center w-full justify-center mt-5 gap-3'>
-                <input type="text" className='p-5 sm:p-5 w-[60%] sm:w-[80%] rounded-full max-w-none min-w-0 focus:outline-none' placeholder='youremail@mail.com'/>
-                <button className='bg-primary1 py-6 sm:py-6 px-6 text-white rounded-full font-[700] relative'>
+                <input type="email" className='p-5 sm:p-5 w-[60%] sm:w-[80%] rounded-full max-w-none min-w-0 focus:outline-none' value={email} onChange={handleMail} placeholder='youremail@mail.com'/>
+                <button className='bg-primary1 py-6 sm:py-6 px-6 text-white rounded-full font-[700] relative' onClick={notify}>
                     <FaArrowRight />
                 </button>
             </form>
         </div>
-
+        <Toaster />
     </div>
   )
 }

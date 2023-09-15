@@ -6,6 +6,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'Afrimages',
   description: 'Join our waitlist to receive exclusive updates on the build progress.',
+  openGraph: {
+    images: './logoGreen.png',
+  },
 }
 
 export default function RootLayout({ children }) {
