@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { FaArrowRight } from "react-icons/fa"
 import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
 
 
 const Main = () => {
@@ -13,9 +14,19 @@ const Main = () => {
         setEmail(e.target.value)
     }
 
-    const notify = (e) => {
+    const notify = async (e) => {
         e.preventDefault()
+
+        let toastId = toast.loading("Joining...")
+
+        await axios.post("https://afrimages-waitlist-api.onrender.com/", {email: email})
+        .then(response => {
+            console.log(response.data)
+        })
+
         setEmail("")
+        
+        toast.dismiss(toastId)
         toast.success('Thanks for Joining.', {
             icon: '👏',
         })
@@ -29,9 +40,9 @@ const Main = () => {
             <div className="overlay" />
         </div>
 
-        <div className="main z-20 absolute flex flex-col items-center w-[60%] sm:w-[90%] justify-center top-[20vh] sm:top-[30vh]  left-[20%] sm:left-[5%]">
+        <div className="main z-20 absolute flex flex-col items-center w-[60%] sm:w-[90%] justify-center top-[20vh] sm:top-[25vh]  left-[20%] sm:left-[5%]">
             <img src="./logoGreen.png" alt="" className='w-[30%] sm:w-[50%]'/>
-            <h1 className='text-[50px] font-[900] text-white'>
+            <h1 className='text-[50px] sm:text-[35px] font-[900] text-white'>
                 Coming Soon.
             </h1>
             <p className='text-white text-center w-[100%]'>Be the first to embark on a visual journey celebrating the beauty, culture, and diversity of Africa through the lens of talented photographers.</p>
